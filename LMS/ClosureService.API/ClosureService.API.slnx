@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ClosureService.API/ClosureService.API.csproj" />
+  <Project Path="ClosureService.Application/ClosureService.Application.csproj" />
+  <Project Path="ClosureService.Domain/ClosureService.Domain.csproj" />
+  <Project Path="ClosureService.Infrastructure/ClosureService.Infrastructure.csproj" />
+</Solution>

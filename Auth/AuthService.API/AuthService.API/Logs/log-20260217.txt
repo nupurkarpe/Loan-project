@@ -1,0 +1,78 @@
+2026-02-17 13:50:15.709 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-02-17 13:50:16.062 +05:30 [INF] HTTP GET /api/User responded 401 in 363.2712 ms
+2026-02-17 13:51:39.358 +05:30 [WRN] Failed to determine the https port for redirect.
+2026-02-17 13:51:46.628 +05:30 [INF] HTTP POST /api/User/login responded 200 in 7280.0767 ms
+2026-02-17 13:59:06.281 +05:30 [WRN] Failed to determine the https port for redirect. | User:  | Controller:  | Action:  | Status:  | Time:  ms
+2026-02-17 13:59:10.486 +05:30 [ERR] HTTP POST /api/User/login responded 500 in 4210.7791 ms | User: Anonymous | Controller: User | Action: Login | Status: 500 | Time: 4210.7791 ms
+System.Exception: Invalid email or password.
+   at AuthService.Infrastructure.Repository.UserRepo.LoginAsync(LoginRequest request) in C:\Users\Admin\source\repos\AuthService.API\AuthService.Infrastructure\Repository\UserRepo.cs:line 65
+   at AuthService.API.Controllers.UserController.Login(LoginRequest request) in C:\Users\Admin\source\repos\AuthService.API\AuthService.API\Controllers\UserController.cs:line 27
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+2026-02-17 13:59:10.804 +05:30 [ERR] An unhandled exception occurred | User:  | Controller:  | Action:  | Status:  | Time:  ms
+System.Exception: Invalid email or password.
+   at AuthService.Infrastructure.Repository.UserRepo.LoginAsync(LoginRequest request) in C:\Users\Admin\source\repos\AuthService.API\AuthService.Infrastructure\Repository\UserRepo.cs:line 65
+   at AuthService.API.Controllers.UserController.Login(LoginRequest request) in C:\Users\Admin\source\repos\AuthService.API\AuthService.API\Controllers\UserController.cs:line 27
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Serilog.AspNetCore.RequestLoggingMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at AuthService.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\Admin\source\repos\AuthService.API\AuthService.API\Middleware\ExceptionMiddleware.cs:line 21
+2026-02-17 13:59:36.450 +05:30 [INF] HTTP POST /api/User/login responded 200 in 1564.7024 ms | User: Anonymous | Controller: User | Action: Login | Status: 200 | Time: 1564.7024 ms
+2026-02-17 14:00:41.629 +05:30 [INF] HTTP GET /api/User/ responded 200 in 367.2633 ms | User: kiran | Controller: User | Action: GetAllUsers | Status: 200 | Time: 367.2633 ms
+2026-02-17 14:07:05.214 +05:30 [WRN] Failed to determine the https port for redirect. | User:  | Controller:  | Action:  | Status:  | Time:  ms
+2026-02-17 14:07:11.848 +05:30 [INF] HTTP POST /api/User/login responded 200 in 6641.4456 ms | User: Anonymous | Controller: User | Action: Login | Status: 200 | Time: 6641.4456 ms
+2026-02-17 14:08:02.361 +05:30 [INF] HTTP GET /api/User/ responded 200 in 236.2152 ms | User: kiran | Controller: User | Action: GetAllUsers | Status: 200 | Time: 236.2152 ms
+2026-02-17 14:10:10.542 +05:30 [INF] HTTP PUT /api/User/update-role responded 403 in 20.1026 ms | User: kiran | Controller: User | Action: UpdateRole | Status: 403 | Time: 20.1026 ms
+2026-02-17 14:13:07.155 +05:30 [INF] HTTP POST /api/User/login responded 200 in 732.7168 ms | User: Anonymous | Controller: User | Action: Login | Status: 200 | Time: 732.7168 ms
+2026-02-17 14:13:22.999 +05:30 [INF] HTTP PUT /api/User/update-role responded 403 in 35.7481 ms | User: admin | Controller: User | Action: UpdateRole | Status: 403 | Time: 35.7481 ms
+2026-02-17 14:13:26.437 +05:30 [INF] HTTP PUT /api/User/update-role responded 403 in 1.1532 ms | User: admin | Controller: User | Action: UpdateRole | Status: 403 | Time: 1.1532 ms
+2026-02-17 14:39:52.518 +05:30 [WRN] Failed to determine the https port for redirect. | User:  | Controller:  | Action:  | Status:  | Time:  ms
+2026-02-17 14:39:53.012 +05:30 [INF] HTTP PUT /api/User/update-role responded 401 in 508.1850 ms | User: Anonymous | Controller: User | Action: UpdateRole | Status: 401 | Time: 508.185 ms
+2026-02-17 14:39:55.151 +05:30 [INF] HTTP PUT /api/User/update-role responded 401 in 9.1368 ms | User: Anonymous | Controller: User | Action: UpdateRole | Status: 401 | Time: 9.1368 ms
+2026-02-17 14:40:34.012 +05:30 [INF] HTTP POST /api/User/login responded 200 in 6367.8028 ms | User: Anonymous | Controller: User | Action: Login | Status: 200 | Time: 6367.8028 ms
+2026-02-17 14:40:52.121 +05:30 [INF] HTTP PUT /api/User/update-role responded 200 in 360.9665 ms | User: null | Controller: User | Action: UpdateRole | Status: 200 | Time: 360.9665 ms
+2026-02-17 14:41:03.908 +05:30 [INF] HTTP GET /api/User responded 200 in 220.7142 ms | User: null | Controller: User | Action: GetAllUsers | Status: 200 | Time: 220.7142 ms
+2026-02-17 14:41:51.113 +05:30 [INF] HTTP GET /api/User/role responded 400 in 47.6970 ms | User: null | Controller: User | Action: GetUserById | Status: 400 | Time: 47.697 ms
+2026-02-17 14:42:49.483 +05:30 [INF] HTTP POST /api/User/role responded 200 in 107.5559 ms | User: null | Controller: User | Action: CreateRole | Status: 200 | Time: 107.5559 ms
+2026-02-17 14:43:12.565 +05:30 [INF] HTTP POST /api/User/role responded 403 in 27.4782 ms | User: Anonymous | Controller: User | Action: CreateRole | Status: 403 | Time: 27.4782 ms
+2026-02-17 14:47:59.373 +05:30 [WRN] Failed to determine the https port for redirect. | User:  | Controller:  | Action:  | Status:  | Time:  ms
+2026-02-17 14:48:03.137 +05:30 [INF] HTTP POST /api/User/login responded 200 in 3771.1910 ms | User: Anonymous | Controller: User | Action: Login | Status: 200 | Time: 3771.191 ms
+2026-02-17 14:48:30.768 +05:30 [INF] HTTP GET /api/User/ responded 200 in 201.1695 ms | User: null | Controller: User | Action: GetAllUsers | Status: 200 | Time: 201.1695 ms
+2026-02-17 14:49:57.393 +05:30 [WRN] Failed to determine the https port for redirect. | User:  | Controller:  | Action:  | Status:  | Time:  ms
+2026-02-17 14:49:58.123 +05:30 [INF] HTTP GET /api/User/1 responded 403 in 739.5420 ms | User: null | Controller: User | Action: GetUserById | Status: 403 | Time: 739.542 ms
+2026-02-17 14:50:00.065 +05:30 [INF] HTTP GET /api/User/1 responded 403 in 14.3931 ms | User: null | Controller: User | Action: GetUserById | Status: 403 | Time: 14.3931 ms
+2026-02-17 14:50:23.644 +05:30 [INF] HTTP POST /api/User/login responded 200 in 2480.6514 ms | User: Anonymous | Controller: User | Action: Login | Status: 200 | Time: 2480.6514 ms
+2026-02-17 14:50:56.525 +05:30 [INF] HTTP GET /api/User/1 responded 403 in 12.8265 ms | User: null | Controller: User | Action: GetUserById | Status: 403 | Time: 12.8265 ms
+2026-02-17 14:50:58.410 +05:30 [INF] HTTP GET /api/User/1 responded 403 in 1.0620 ms | User: null | Controller: User | Action: GetUserById | Status: 403 | Time: 1.062 ms
+2026-02-17 14:51:13.371 +05:30 [INF] HTTP GET /api/User/1 responded 403 in 1.4489 ms | User: null | Controller: User | Action: GetUserById | Status: 403 | Time: 1.4489 ms
+2026-02-17 14:51:31.276 +05:30 [INF] HTTP GET /api/User/ responded 200 in 144.7476 ms | User: null | Controller: User | Action: GetAllUsers | Status: 200 | Time: 144.7476 ms
+2026-02-17 14:51:35.376 +05:30 [INF] HTTP GET /api/User/1 responded 403 in 0.9079 ms | User: null | Controller: User | Action: GetUserById | Status: 403 | Time: 0.9079 ms
+2026-02-17 14:52:55.282 +05:30 [WRN] Failed to determine the https port for redirect. | User:  | Controller:  | Action:  | Status:  | Time:  ms
+2026-02-17 14:56:06.025 +05:30 [WRN] Failed to determine the https port for redirect. | User:  | Controller:  | Action:  | Status:  | Time:  ms
+2026-02-17 14:56:43.315 +05:30 [INF] HTTP GET /api/User/1 responded 403 in 30996.0661 ms | User: null | Controller: User | Action: GetUserById | Status: 403 | Time: 30996.0661 ms
+2026-02-17 14:57:22.056 +05:30 [INF] HTTP POST /api/User/login responded 200 in 2622.9932 ms | User: Anonymous | Controller: User | Action: Login | Status: 200 | Time: 2622.9932 ms
+2026-02-17 14:57:58.605 +05:30 [INF] HTTP GET /api/User/1 responded 403 in 10893.9058 ms | User: null | Controller: User | Action: GetUserById | Status: 403 | Time: 10893.9058 ms
+2026-02-17 15:03:55.866 +05:30 [WRN] Failed to determine the https port for redirect. | User:  | Controller:  | Action:  | Status:  | Time:  ms
+2026-02-17 15:03:59.324 +05:30 [INF] HTTP GET /api/User/1 responded 200 in 3464.2035 ms | User: 1 | Controller: User | Action: GetUserById | Status: 200 | Time: 3464.2035 ms
+2026-02-17 15:04:07.557 +05:30 [INF] HTTP GET /api/User/2 responded 403 in 32.9042 ms | User: 1 | Controller: User | Action: GetUserById | Status: 403 | Time: 32.9042 ms

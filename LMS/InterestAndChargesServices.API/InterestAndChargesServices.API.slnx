@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="InterestAndChargesServices.API/InterestAndChargesServices.API.csproj" />
+  <Project Path="InterestAndChargesServices.Application/InterestAndChargesServices.Application.csproj" />
+  <Project Path="InterestAndChargesServices.Domain/InterestAndChargesServices.Domain.csproj" />
+  <Project Path="InterestAndChargesServices.Infrastructure/InterestAndChargesServices.Infrastructure.csproj" />
+</Solution>

@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="GeographicService.Application/GeographicService.Application.csproj" />
+  <Project Path="GeographicService.Domain/GeographicService.Domain.csproj" />
+  <Project Path="GeographicService.Infrastructure/GeographicService.Infrastructure.csproj" />
+  <Project Path="GeographicService/GeographicService.csproj" />
+</Solution>

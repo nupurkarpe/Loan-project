@@ -1,0 +1,6 @@
+@EligibilityandScorecard.API_HostAddress = http://localhost:5200
+
+GET {{EligibilityandScorecard.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

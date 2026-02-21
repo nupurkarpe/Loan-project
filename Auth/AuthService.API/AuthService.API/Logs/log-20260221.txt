@@ -1,0 +1,6 @@
+2026-02-21 09:26:13.796 +05:30 [WRN] Failed to determine the https port for redirect. | User:  | Controller:  | Action:  | Status:  | Time:  ms
+2026-02-21 09:27:34.656 +05:30 [INF] HTTP GET /api/User/6 responded 200 in 80416.0281 ms | User: Anonymous | Controller: User | Action: GetUserById | Status: 200 | Time: 80416.0281 ms
+2026-02-21 09:28:56.493 +05:30 [INF] HTTP GET /api/User/6 responded 200 in 11223.6458 ms | User: Anonymous | Controller: User | Action: GetUserById | Status: 200 | Time: 11223.6458 ms
+2026-02-21 09:46:46.495 +05:30 [INF] HTTP GET /api/User/6 responded 200 in 180926.0056 ms | User: Anonymous | Controller: User | Action: GetUserById | Status: 200 | Time: 180926.0056 ms
+2026-02-21 09:59:15.265 +05:30 [INF] HTTP GET /api/User/6 responded 200 in 6291.1609 ms | User: Anonymous | Controller: User | Action: GetUserById | Status: 200 | Time: 6291.1609 ms
+2026-02-21 10:02:43.515 +05:30 [INF] HTTP GET /api/User/6 responded 200 in 1144.6968 ms | User: Anonymous | Controller: User | Action: GetUserById | Status: 200 | Time: 1144.6968 ms
