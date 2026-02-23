@@ -13,13 +13,20 @@ namespace PaymentService.Infrastructure.Repository
         private readonly IMapper mapper;
         private readonly LoanTableClient loanTableClient;
         private readonly InterestChargesClient interestChargesClient;
+        private readonly EmiScheduleClient emiScheduleClient;
 
-        public PaymentRepo(ApplicationDbContext db, IMapper mapper, LoanTableClient loanTableClient, InterestChargesClient interestChargesClient)
+        public PaymentRepo(
+            ApplicationDbContext db,
+            IMapper mapper,
+            LoanTableClient loanTableClient,
+            InterestChargesClient interestChargesClient,
+            EmiScheduleClient emiScheduleClient)
         {
             this.db = db;
             this.mapper = mapper;
             this.loanTableClient = loanTableClient;
             this.interestChargesClient = interestChargesClient;
+            this.emiScheduleClient = emiScheduleClient;
         }
 
         public async Task<PaymentResponse> CreatePaymentAsync(CreatePaymentRequest request)
@@ -107,6 +114,22 @@ namespace PaymentService.Infrastructure.Repository
             payment.ModifiedAt = DateTime.UtcNow;
 
             await db.SaveChangesAsync();
+
+            // Update LoanTable outstanding balances after payment
+            await loanTableClient.UpdateLoanAfterPayment(
+                payment.LoanId.Value,
+                principalPaid,
+                interestPaid,
+                payment.PaymentDate);
+
+            // Update the EMI schedule row after payment
+            await emiScheduleClient.UpdateEmiAfterPayment(
+                payment.LoanId.Value,
+                payment.ScheduleId,
+                principalPaid + interestPaid,
+                interestPaid,
+                payment.PaymentDate);
+
             return mapper.Map<PaymentResponse>(payment);
         }
     }

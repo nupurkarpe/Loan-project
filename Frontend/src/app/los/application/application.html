@@ -1,0 +1,32 @@
+<div class="form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Step 2: LOS Application</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="subtitle">Submit a new loan application identifying the correct product.</p>
+
+            <div class="form-grid">
+                <!-- Loan Type -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Loan Type</mat-label>
+                    <mat-select placeholder="Select Loan Product">
+                        <mat-option value="1">Home Loan</mat-option>
+                        <mat-option value="2">Personal Loan</mat-option>
+                        <mat-option value="3">Auto Loan</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Requested Amount -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Requested Amount</mat-label>
+                    <input matInput type="number" placeholder="Enter amount">
+                    <span matTextPrefix>₹&nbsp;</span>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary" routerLink="/los/eligibility">Next: Eligibility Check</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

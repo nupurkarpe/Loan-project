@@ -11,9 +11,9 @@ namespace LoanTable.Application.DTO
             this.client = http;
         }
 
-        public async Task<LoanDTO> GetDeal(int id)
+        public async Task<GetDealDTO> GetDeal(int id)
         {
-            var response = await client.GetFromJsonAsync<OriginationApiResponse<LoanDTO>>($"/api/LoanDeals/{id}");
+            var response = await client.GetFromJsonAsync<OriginationApiResponse<GetDealDTO>>($"/api/LoanDeals/{id}");
             return response?.Data;
         }
 

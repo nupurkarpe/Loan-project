@@ -45,9 +45,9 @@ namespace LoanOriginationService.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddLoanDeald(LoanDealsResponseDto dto)
+        public async Task<IActionResult> AddLoanDeald(CreateLoanDealRequestDto dto)
         {
-            repo.AddLoanDeals(dto);
+            await repo.AddLoanDeals(dto);
             return Ok(ApiResponse<string>.SuccessResponse(
                 null, "Loan Deal Added Successfully"));
         }

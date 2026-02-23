@@ -4,6 +4,7 @@ using LoanOriginationService.Application.Interfaces;
 using LoanOriginationService.Domain.Enum;
 using LoanOriginationService.Domain.Models;
 using LoanOriginationService.Infrastructure.Data;
+using LoanOriginationService.Infrastructure.ExternalServices;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -18,35 +19,51 @@ namespace LoanOriginationService.Infrastructure.Repository
     {
         private readonly ApplicationDbContext db;
         private readonly IMapper mapper;
+        private readonly ScorecardApiClient _scorecardApiClient;
 
-        public LoanDealsRepo(ApplicationDbContext db, IMapper mapper)
+        public LoanDealsRepo(ApplicationDbContext db, IMapper mapper, ScorecardApiClient scorecardApiClient)
         {
             this.mapper = mapper;
             this.db = db;
+            _scorecardApiClient = scorecardApiClient;
         }
-        public void AddLoanDeals(LoanDealsResponseDto dto)
+
+        public async Task AddLoanDeals(CreateLoanDealRequestDto dto)
         {
-            var loanid = db.LoanTypes.FirstOrDefault(c => c.loanTypeId == dto.loanTypeId);
-
-            if (loanid == null)
-            {
+            var loanType = db.LoanTypes.FirstOrDefault(c => c.loanTypeId == dto.loanTypeId);
+            if (loanType == null)
                 throw new ArgumentException("Loan Type Not Found");
-            }
 
-            if (dto.riskRating < 1 || dto.riskRating > 10)
+            var scorecard = await _scorecardApiClient.GetLatestScorecardAsync(dto.custId);
+            if (scorecard == null)
+                throw new ArgumentException("No scorecard found for this customer. Please complete the eligibility check first.");
+
+            int riskRating = scorecard.RiskCategory?.ToLower() switch
             {
-                throw new ArgumentException("Risk Rating must be between 1 and 10");
-            }
+                "low"    => 3,
+                "medium" => 6,
+                "high"   => 9,
+                _        => 5
+            };
 
+            double eligibleAmount = (double)scorecard.EligibleLoanAmount;
 
-            if (dto.eligibleAmount <dto.approvedAmount)
+            if (eligibleAmount < dto.approvedAmount)
+                throw new ArgumentException("Approved Amount cannot exceed the Eligible Amount from the scorecard");
+
+            var deal = new LoanDeals
             {
-                throw new ArgumentException("Approved Amount Should be greater the Eligible Amount");
-            }
+                custId         = dto.custId,
+                scorecardId    = scorecard.ScoreId,
+                loanTypeId     = dto.loanTypeId,
+                eligibleAmount = (decimal)eligibleAmount,
+                approvedAmount = (decimal)dto.approvedAmount,
+                riskRating     = riskRating,
+                cibilScore     = scorecard.CibilScore
+            };
 
-            var d = mapper.Map<LoanDeals>(dto);
-            db.LoanDeals.Add(d);
-            db.SaveChanges();
+            db.LoanDeals.Add(deal);
+            await db.SaveChangesAsync();
         }
 
         public void ApproveLoanDeal(int id, LoanDecisionDto e)

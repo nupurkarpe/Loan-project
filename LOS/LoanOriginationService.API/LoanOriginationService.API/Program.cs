@@ -2,6 +2,7 @@ using LoanOriginationService.API.Exception;
 using LoanOriginationService.Application.Interfaces;
 using LoanOriginationService.Application.Mapper;
 using LoanOriginationService.Infrastructure.Data;
+using LoanOriginationService.Infrastructure.ExternalServices;
 using LoanOriginationService.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -49,6 +50,11 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ILoanRepo, LoanRepo>();
 builder.Services.AddScoped<IloanDealsRepo, LoanDealsRepo>();
+
+builder.Services.AddHttpClient<ScorecardApiClient>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["ScorecardAddress"] ?? "http://localhost:5034/");
+});
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
     builder.Configuration.GetConnectionString("dbconn")

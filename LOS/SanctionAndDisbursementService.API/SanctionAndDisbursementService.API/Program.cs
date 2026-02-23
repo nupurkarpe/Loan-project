@@ -64,7 +64,7 @@ Log.Error("Test error log");
 
 builder.Services.AddHttpClient<LoanDealsClient>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["LoanDealsAddress"] ?? "https://localhost:7094");
+    client.BaseAddress = new Uri(builder.Configuration["LoanDealsAddress"] ?? "http://localhost:5113");
 });
 
 

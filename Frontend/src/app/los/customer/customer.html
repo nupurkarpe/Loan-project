@@ -1,0 +1,73 @@
+<div class="form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Step 1: Customer KYC</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="subtitle">Please provide your details below.</p>
+
+            <div class="form-grid">
+                <!-- Mobile -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Mobile Number</mat-label>
+                    <input matInput placeholder="Enter mobile number">
+                </mat-form-field>
+
+                <!-- Aadhar -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Aadhar ID</mat-label>
+                    <input matInput placeholder="Enter Aadhar ID">
+                </mat-form-field>
+
+                <!-- PAN -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>PAN</mat-label>
+                    <input matInput placeholder="Enter PAN">
+                </mat-form-field>
+
+                <!-- DOB -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Date of Birth</mat-label>
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+                <!-- Age -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Age</mat-label>
+                    <input matInput type="number" placeholder="Enter age">
+                </mat-form-field>
+
+                <!-- Gender -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Gender</mat-label>
+                    <mat-select placeholder="Select Gender">
+                        <mat-option value="male">Male</mat-option>
+                        <mat-option value="female">Female</mat-option>
+                        <mat-option value="other">Other</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Employment Type -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Employment Type</mat-label>
+                    <mat-select placeholder="Select Type">
+                        <mat-option value="salaried">Salaried</mat-option>
+                        <mat-option value="self-employed">Self-Employed</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Monthly Income -->
+                <mat-form-field appearance="outline" class="form-field">
+                    <mat-label>Monthly Income</mat-label>
+                    <input matInput type="number" placeholder="Enter income">
+                    <span matTextPrefix>₹&nbsp;</span>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary" routerLink="/los/application">Save & Next</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

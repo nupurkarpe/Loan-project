@@ -24,7 +24,7 @@ namespace LoanTable.Controllers
     [Route("/create")]
     public async Task<IActionResult> createLoans(CreateLoanRequest req)
     {
-      var pdata = repo.CreateLoanAsync(req);
+      var pdata = await repo.CreateLoanAsync(req);
       return Ok(new { message = "Loan created Successfully" });
     }
 
@@ -122,6 +122,16 @@ namespace LoanTable.Controllers
     {
       var data = await repo.UpdateStatusAsync(id,status);
       return Ok(new {message ="Customer status updated Successfully" });
+    }
+
+    [HttpPut]
+    [Route("{id}/after-payment")]
+    public async Task<IActionResult> UpdateLoanAfterPayment(int id, [FromBody] UpdateLoanAfterPaymentRequest req)
+    {
+      var result = await repo.UpdateLoanAfterPaymentAsync(id, req);
+      if (!result)
+        return NotFound(new { message = $"Loan {id} not found." });
+      return Ok(new { message = "Loan updated after payment successfully." });
     }
 
     [HttpGet]

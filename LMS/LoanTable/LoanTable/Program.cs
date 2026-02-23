@@ -4,6 +4,7 @@ using LoanTable.Application.Mapping;
 using LoanTable.Application.Interfaces;
 using LoanTable.Infrastructure.Repository;
 using LoanTable.Application.DTO;
+using AutoMapper;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,12 +22,12 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddHttpClient<OriginationClient>(client =>
 {
-  client.BaseAddress = new Uri(builder.Configuration["OriginationAddress"] ?? "http://localhost:5156");
+  client.BaseAddress = new Uri(builder.Configuration["OriginationAddress"] ?? "http://localhost:5113");
 });
 
 builder.Services.AddHttpClient<SanctionClient>(client =>
 {
-  client.BaseAddress = new Uri(builder.Configuration["SanctionAddress"] ?? "http://localhost:5103");
+  client.BaseAddress = new Uri(builder.Configuration["SanctionAddress"] ?? "http://localhost:5159");
 });
 
 builder.Services.AddDbContext<ApplicationDbContext>(

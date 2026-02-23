@@ -1,0 +1,44 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav mode="side" opened class="sidenav">
+        <mat-toolbar color="primary">Loan App</mat-toolbar>
+        <mat-nav-list>
+            <h3 matSubheader>LOS (Origination)</h3>
+            <a mat-list-item routerLink="/los/customer" routerLinkActive="active">
+                <mat-icon matListItemIcon>person_add</mat-icon>
+                <span matListItemTitle>Start Application</span>
+            </a>
+
+            <mat-divider></mat-divider>
+            <h3 matSubheader>LMS (Management)</h3>
+            <a mat-list-item routerLink="/lms/dashboard" routerLinkActive="active">
+                <mat-icon matListItemIcon>dashboard</mat-icon>
+                <span matListItemTitle>Overview</span>
+            </a>
+            <a mat-list-item routerLink="/lms/emi-schedule" routerLinkActive="active">
+                <mat-icon matListItemIcon>calendar_today</mat-icon>
+                <span matListItemTitle>EMI Schedule</span>
+            </a>
+            <a mat-list-item routerLink="/lms/payment" routerLinkActive="active">
+                <mat-icon matListItemIcon>payment</mat-icon>
+                <span matListItemTitle>Make a Payment</span>
+            </a>
+            <a mat-list-item routerLink="/lms/closure" routerLinkActive="active">
+                <mat-icon matListItemIcon>done_all</mat-icon>
+                <span matListItemTitle>Loan Closure</span>
+            </a>
+        </mat-nav-list>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <mat-toolbar color="primary">
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <span class="spacer"></span>
+            <button mat-button routerLink="/login">Logout</button>
+        </mat-toolbar>
+        <div class="content">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -10,6 +10,6 @@ namespace InterestService.Application.Interfaces
   public interface IEmi
   {
     Task<List<EmischeduleResponse>> GenerateSchedule(EmiRequestDTO req);
-
+    Task<bool> UpdateEmiAfterPaymentAsync(int loanId, int? scheduleId, UpdateEmiAfterPaymentRequest req);
   }
 }

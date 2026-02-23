@@ -1,0 +1,36 @@
+<div class="form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Step 5: Sanction & Disbursement</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="subtitle">Review the final approved loan terms before sanctioning and triggering disbursement.</p>
+
+            <div class="form-grid">
+                <!-- Loan Amount -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Approved Loan Amount</mat-label>
+                    <input matInput type="number" placeholder="Calculated internally">
+                    <span matTextPrefix>₹&nbsp;</span>
+                </mat-form-field>
+
+                <!-- Interest Rate -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Interest Rate</mat-label>
+                    <input matInput type="number" placeholder="Enter custom rate or leave calculated">
+                    <span matTextSuffix>%</span>
+                </mat-form-field>
+
+                <!-- Tenure -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Tenure</mat-label>
+                    <input matInput type="number" placeholder="Enter term limit">
+                    <span matTextSuffix>months</span>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary" routerLink="/lms/dashboard">Sanction & Disburse</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

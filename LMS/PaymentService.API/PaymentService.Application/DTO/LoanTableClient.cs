@@ -16,6 +16,18 @@ namespace PaymentService.Application.DTO
             var response = await client.GetFromJsonAsync<LoanTableApiResponse<LoanDTO>>($"/api/Loan/{loanId}");
             return response?.Data;
         }
+
+        public async Task UpdateLoanAfterPayment(int loanId, decimal principalPaid, decimal interestPaid, DateTime paymentDate)
+        {
+            var payload = new
+            {
+                PrincipalPaid = principalPaid,
+                InterestPaid = interestPaid,
+                PaymentDate = paymentDate
+            };
+            var response = await client.PutAsJsonAsync($"/api/Loan/{loanId}/after-payment", payload);
+            response.EnsureSuccessStatusCode();
+        }
     }
 
     public class LoanTableApiResponse<T>
@@ -25,3 +37,4 @@ namespace PaymentService.Application.DTO
         public string Message { get; set; }
     }
 }
+

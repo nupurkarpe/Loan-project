@@ -9,9 +9,9 @@ namespace LoanTable.Application.DTO
 {
   public class  GetSanctionDTO
   {
-    public int id { get; set; }
+    public int sanctionId { get; set; }
 
-    public int dealid { get; set; }
+    public int dealId { get; set; }
 
     public string sanctionNo { get; set; }
 
@@ -19,13 +19,11 @@ namespace LoanTable.Application.DTO
 
     public decimal interestRate { get; set; }
 
-    public decimal emiamount { get; set; }
+    public decimal emiAmount { get; set; }
 
-    public int tenuremonths { get; set; }
+    public int tenureMonths { get; set; }
 
-    public DateTime createdAt { get; set; }
-
-    public List<RepaymentDTO>? RepaymentSchedule { get; set; }
+    public string? repaymentSchedule { get; set; }
 
     public DateTime? AcceptedDate { get; set;} 
 

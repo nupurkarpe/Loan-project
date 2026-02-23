@@ -2,6 +2,7 @@ using InterestService.Application.DTO;
 using InterestService.Application.Interfaces;
 using InterestService.Domain.Model;
 using InterestService.Repository.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,13 @@ namespace InterestService.Repository.Repository
   {
     EmiClient emiClient;
     private readonly ApplicationDbContext _context;
-    public EmiRepo(EmiClient client,ApplicationDbContext context) {
+    public EmiRepo(EmiClient client, ApplicationDbContext context)
+    {
       this.emiClient = client;
       this._context = context;
     }
 
-
-    public  async Task<List<EmischeduleResponse>> GenerateSchedule(EmiRequestDTO req)  
+    public async Task<List<EmischeduleResponse>> GenerateSchedule(EmiRequestDTO req)
     {
       var n = await emiClient.getLoanDetails(req.loanId);
       if (n == null) { return null; }
@@ -42,17 +43,17 @@ namespace InterestService.Repository.Repository
         decimal principal = Math.Round(emi - interest, 2);
         decimal endingBalance = Math.Round(balance - principal, 2);
 
-        if (i == n.TenureMonths) 
+        if (i == n.TenureMonths)
         {
           principal = balance;
           emi = principal + interest;
           endingBalance = 0;
         }
 
-
         schedule.Add(new EmischeduleResponse
         {
           ScheduleId = i,
+          LoanId = n.LoanId,
           InstallmentNumber = i,
           DueDate = n.DisbursementDate.AddMonths(i),
           OpeningBalance = balance,
@@ -60,21 +61,20 @@ namespace InterestService.Repository.Repository
           PrincipalComponent = principal,
           InterestComponent = interest,
           ClosingBalance = endingBalance,
-          PaymentStatus = null,
+          PaymentStatus = "Pending",
           PaidAmount = 0,
-          PenaltyAmount =0,
+          PenaltyAmount = 0,
           PendingAmount = principal,
+          TotalDue = emi,
         });
 
         balance = endingBalance;
 
-
         var loanEmiSchedule = new LoanEmiSchedule
         {
-          
           loanId = n.LoanId,
           InstallmentNo = i,
-          Duedate = int.Parse(n.DisbursementDate.AddMonths(i).ToString("yyyyMMdd")), 
+          Duedate = int.Parse(n.DisbursementDate.AddMonths(i).ToString("yyyyMMdd")),
           EmiAmount = emi,
           PrincipalAmount = principal,
           InterestAmount = interest,
@@ -83,20 +83,48 @@ namespace InterestService.Repository.Repository
           PaidDate = null,
           PendingAmount = principal,
           PenaltyAmount = 0,
-          TotalDue = emi, 
+          TotalDue = emi,
           paidInterest = null,
           isActive = true,
           createdAt = DateTime.UtcNow.ToString("o")
         };
-        
-        await _context.EmiSchedules.AddAsync(loanEmiSchedule);
-        _context.SaveChanges();
 
+        await _context.EmiSchedules.AddAsync(loanEmiSchedule);
+        await _context.SaveChangesAsync();
       }
+
       return schedule;
     }
 
+    public async Task<bool> UpdateEmiAfterPaymentAsync(int loanId, int? scheduleId, UpdateEmiAfterPaymentRequest req)
+    {
+      LoanEmiSchedule emi = null;
 
+      if (scheduleId.HasValue)
+      {
+        emi = await _context.EmiSchedules
+          .FirstOrDefaultAsync(e => e.id == scheduleId.Value && e.loanId == loanId && e.isActive);
+      }
 
+      if (emi == null)
+      {
+        // Fall back to next pending EMI for this loan ordered by due date
+        emi = await _context.EmiSchedules
+          .Where(e => e.loanId == loanId && e.PaymentStatus == "pending" && e.isActive)
+          .OrderBy(e => e.Duedate)
+          .FirstOrDefaultAsync();
+      }
+
+      if (emi == null) return false;
+
+      emi.PaidAmount = req.PaidAmount;
+      emi.paidInterest = req.PaidInterest;
+      emi.PaidDate = req.PaidDate;
+      emi.PendingAmount = Math.Max(0, emi.EmiAmount - req.PaidAmount);
+      emi.PaymentStatus = emi.PendingAmount <= 0 ? "paid" : "partial";
+
+      await _context.SaveChangesAsync();
+      return true;
+    }
   }
 }

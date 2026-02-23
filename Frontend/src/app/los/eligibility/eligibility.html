@@ -1,0 +1,45 @@
+<div class="form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Step 3: Eligibility & Scorecard</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="subtitle">Provide financial context for rule engine assessments.</p>
+
+            <div class="form-grid">
+                <!-- Monthly Income -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Monthly Income</mat-label>
+                    <input matInput type="number" placeholder="Enter income">
+                    <span matTextPrefix>₹&nbsp;</span>
+                </mat-form-field>
+
+                <!-- Employment Type -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Employment Type</mat-label>
+                    <mat-select placeholder="Select Type">
+                        <mat-option value="salaried">Salaried</mat-option>
+                        <mat-option value="self-employed">Self-Employed</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- Age -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Age</mat-label>
+                    <input matInput type="number" placeholder="Enter age">
+                </mat-form-field>
+
+                <!-- Existing Obligation -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Existing Obligations (EMI equivalent)</mat-label>
+                    <input matInput type="number" placeholder="Enter obligations">
+                    <span matTextPrefix>₹&nbsp;</span>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary" routerLink="/los/credit-evaluation">Next: Credit
+                Evaluation</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

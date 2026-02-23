@@ -49,27 +49,29 @@ namespace LoanTable.Infrastructure.Repository
       
         var loan = new LoanTables
         {
-          dealId = sanction.dealid,
-          sanctionId = sanction.id,
+          dealId = sanction.dealId,
+          sanctionId = sanction.sanctionId,
           sanctionedAmount = sanction.loanAmount,
           sanctionNo = sanction.sanctionNo,
-          customerId = deal.CustomerId,
-          DisbursedAmount = deal.eligibleAmount,
+          customerId = deal.custId,
+          scoreCardId = deal.scorecardId,
+          disbursementId = req.DisbursementId,
+          DisbursedAmount = (decimal)deal.eligibleAmount,
           DisbursementDate = DateTime.Now,
-          tenureMonths = sanction.tenuremonths,
-          emiAmount = sanction.emiamount,
+          interestRate = sanction.interestRate,
+          tenureMonths = sanction.tenureMonths,
+          emiAmount = sanction.emiAmount,
           emiDay = 0,
-          FirstEmiDate = sanction.createdAt.AddDays(5),
-          NextEmiDate = sanction.createdAt.AddMonths(1),
-          maturityDate = sanction.createdAt.AddMonths(2),
+          FirstEmiDate = DateTime.Now.AddDays(5),
+          NextEmiDate = DateTime.Now.AddMonths(1),
+          maturityDate = DateTime.Now.AddMonths(sanction.tenureMonths),
           branchId = req.BranchId,
           loanTypeId = req.LoanTypeId,
-          disbursementId = deal.DisbursementId,
           outstandingPrincipal = sanction.loanAmount,
           outstandingInterest = 0,
           totalOutstanding = sanction.loanAmount,
-          AccountStatus = sanction.currentStatus,
-          remainingTenure = sanction.tenuremonths,
+          AccountStatus = sanction.currentStatus ?? "Active",
+          remainingTenure = sanction.tenureMonths,
           dpd = 0,
           TransactionReference =  string.Empty,
           CreatedAt = DateTime.Now,
@@ -79,7 +81,7 @@ namespace LoanTable.Infrastructure.Repository
         };
       
           await db.Loans.AddAsync(loan);
-          db.SaveChanges();
+          await db.SaveChangesAsync();
 
           var m = mapper.Map<LoanDTO>(loan);
 
@@ -172,6 +174,29 @@ namespace LoanTable.Infrastructure.Repository
         .Where(l => l.AccountStatus == "Active")
         .ToListAsync();
       return mapper.Map<List<LoanDTO>>(loans);
+    }
+
+    public async Task<bool> UpdateLoanAfterPaymentAsync(int loanId, UpdateLoanAfterPaymentRequest req)
+    {
+      var loan = await db.Loans.FirstOrDefaultAsync(x => x.LoanId == loanId);
+      if (loan == null) return false;
+
+      loan.outstandingPrincipal = Math.Max(0, loan.outstandingPrincipal - req.PrincipalPaid);
+      loan.outstandingInterest = Math.Max(0, loan.outstandingInterest - req.InterestPaid);
+      loan.totalOutstanding = loan.outstandingPrincipal + loan.outstandingInterest;
+
+      if (loan.remainingTenure > 0)
+        loan.remainingTenure -= 1;
+
+      loan.LastPaymentDate = req.PaymentDate;
+      loan.NextEmiDate = req.PaymentDate.AddMonths(1);
+      loan.ModifiedAt = DateTime.UtcNow;
+
+      if (loan.outstandingPrincipal <= 0)
+        loan.AccountStatus = "Closed";
+
+      await db.SaveChangesAsync();
+      return true;
     }
 
 

@@ -1,0 +1,38 @@
+<div class="form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Make a Payment</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="subtitle">Process EMI payments for an active loan deal.</p>
+
+            <div class="form-grid">
+                <!-- Loan Deal ID -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Loan Deal ID</mat-label>
+                    <input matInput type="number" placeholder="Enter Deal ID">
+                </mat-form-field>
+
+                <!-- Payment Amount -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Payment Amount</mat-label>
+                    <input matInput type="number" placeholder="Enter amount to pay">
+                    <span matTextPrefix>₹&nbsp;</span>
+                </mat-form-field>
+
+                <!-- Payment Method -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Payment Method</mat-label>
+                    <mat-select placeholder="Select Method">
+                        <mat-option value="bank_transfer">Bank Transfer</mat-option>
+                        <mat-option value="upi">UPI</mat-option>
+                        <mat-option value="cash">Cash</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary">Submit Payment</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

@@ -1,0 +1,22 @@
+<div class="form-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Step 4: Credit Evaluation</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <p class="subtitle">Fetch detailed CIBIL score checks using the customer's PAN number.</p>
+
+            <div class="form-grid">
+                <!-- PAN -->
+                <mat-form-field appearance="outline" class="form-field full-width">
+                    <mat-label>Customer PAN Number</mat-label>
+                    <input matInput type="text" placeholder="Enter PAN number">
+                </mat-form-field>
+            </div>
+        </mat-card-content>
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary" routerLink="/los/sanction-disbursement">Generate Report &
+                Next</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

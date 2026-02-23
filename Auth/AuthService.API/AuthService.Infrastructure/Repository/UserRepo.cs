@@ -32,13 +32,21 @@ namespace AuthService.Infrastructure.Repository
         {
             if (await db.Users.AnyAsync(u => u.Email == request.Email))
                 throw new Exception("Email is already registered.");
-            
+
+            var customerRole = await db.Roles.FirstOrDefaultAsync(r => r.Name == "customer");
+            if (customerRole == null)
+            {
+                customerRole = new Role { Name = "customer" };
+                db.Roles.Add(customerRole);
+                await db.SaveChangesAsync();
+            }
+
             var user = new User
             {
                 Name = request.Name,
                 Email = request.Email,
                 PassHash = BCrypt.Net.BCrypt.HashPassword(request.Password),
-                RoleId = 1 
+                RoleId = customerRole.Id
             };
             db.Users.Add(user);
             await db.SaveChangesAsync();

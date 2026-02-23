@@ -16,5 +16,7 @@ namespace PaymentService.Application.DTO
         public DateTime? NextEmiDate { get; set; }
         public DateTime? LastPaymentDate { get; set; }
         public int Dpd { get; set; }
+        public int RemainingTenure { get; set; }
     }
 }
+

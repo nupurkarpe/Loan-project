@@ -9,7 +9,7 @@ namespace LoanOriginationService.Application.Interfaces
 {
     public interface IloanDealsRepo
     {
-        void AddLoanDeals(LoanDealsResponseDto dto);
+        Task AddLoanDeals(CreateLoanDealRequestDto dto);
 
         Task<List<LoanDealsDto>> GetAllLoanDeals();
 

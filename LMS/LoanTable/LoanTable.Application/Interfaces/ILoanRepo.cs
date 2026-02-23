@@ -19,5 +19,6 @@ namespace LoanTable.Application.Interfaces
     Task<BalanceResponse> GetBalanceAsync(int loanId);
     Task<bool> UpdateStatusAsync(int loanId, string status);
     Task<List<LoanDTO>> GetActiveLoansAsync();
+    Task<bool> UpdateLoanAfterPaymentAsync(int loanId, UpdateLoanAfterPaymentRequest req);
   }
 }

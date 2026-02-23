@@ -35,7 +35,12 @@ builder.Services.AddHttpClient<LoanTableClient>(client =>
 
 builder.Services.AddHttpClient<InterestChargesClient>(client =>
 {
-    client.BaseAddress = new Uri(builder.Configuration["InterestChargesAddress"] ?? "http://localhost:5145");
+    client.BaseAddress = new Uri(builder.Configuration["InterestChargesAddress"] ?? "http://localhost:5087");
+});
+
+builder.Services.AddHttpClient<EmiScheduleClient>(client =>
+{
+    client.BaseAddress = new Uri(builder.Configuration["InterestChargesAddress"] ?? "http://localhost:5087");
 });
 
 var app = builder.Build();
